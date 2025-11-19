@@ -22,7 +22,6 @@ import { updateSettingImage } from "@/actions/update-setting-image";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import FooterSettingsCard from "./FooterSettingsCard";
-import SocialMediaCard from "./SocialMediaCard";
 
 import {
   Tabs,
@@ -38,21 +37,12 @@ import { revalidateData } from "@/actions/revalidate-data";
 
 export default function BasicSettingsPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<"basicInfo" |"statistics" | "footerSettings" | "socialMedia">("basicInfo");
+  const [activeTab, setActiveTab] = useState<"basicInfo" |"statistics" | "footerSettings">("basicInfo");
   const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState({
     websiteName: "",
     logoUrl: "",
     faviconUrl: "",
-    githubUrl: "",
-    twitterUrl: "",
-    discordUrl: "",
-    weixinUrl: "",
-    weiboUrl: "",
-    bilibiliUrl: "",
-    zhihuUrl: "",
-    youtubeUrl: "",
-    linkedinUrl: "",
     copyrightText: "",
     contactEmail: "",
     googleAnalyticsId: "",
@@ -132,18 +122,6 @@ export default function BasicSettingsPage() {
               copyrightText: settings.copyrightText,
               contactEmail: settings.contactEmail
             };
-          case "socialMedia":
-            return {
-              githubUrl: settings.githubUrl,
-              twitterUrl: settings.twitterUrl,
-              discordUrl: settings.discordUrl,
-              weixinUrl: settings.weixinUrl,
-              weiboUrl: settings.weiboUrl,
-              bilibiliUrl: settings.bilibiliUrl,
-              zhihuUrl: settings.zhihuUrl,
-              youtubeUrl: settings.youtubeUrl,
-              linkedinUrl: settings.linkedinUrl
-            };
           default:
             return {};
         }
@@ -218,11 +196,10 @@ export default function BasicSettingsPage() {
             onValueChange={(value) => setActiveTab(value as typeof activeTab)}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-4 mb-6">
+            <TabsList className="grid w-full grid-cols-3 mb-6">
               <TabsTrigger value="basicInfo">Basic Info</TabsTrigger>
               <TabsTrigger value="statistics">Statistics</TabsTrigger>
               <TabsTrigger value="footerSettings">Footer</TabsTrigger>
-              <TabsTrigger value="socialMedia">Social Media</TabsTrigger>
             </TabsList>
 
             <TabsContent value="basicInfo">
@@ -312,17 +289,6 @@ export default function BasicSettingsPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="socialMedia">
-              <div className="space-y-4">
-                <p className="text-sm text-muted-foreground font-normal">
-                  Social Media Links
-                </p>
-                <SocialMediaCard
-                  settings={settings}
-                  handleChange={handleChange}
-                />
-              </div>
-            </TabsContent>
           </Tabs>
 
           <div className="flex justify-end">

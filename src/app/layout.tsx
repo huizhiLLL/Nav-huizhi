@@ -32,7 +32,7 @@ export const generateMetadata = async (
 ): Promise<Metadata> => {
   try {
     const tableExists = await checkSiteSettingTableExists();
-    const keys = ["websiteName", "description", "keywords", "siteUrl", "faviconUrl", "ogImage"];
+    const keys = ["websiteName", "description", "keywords", "faviconUrl", "clarityId"];
     let settings: any;
     if (tableExists) {
       settings = await prisma.siteSetting.findMany({
@@ -58,7 +58,6 @@ export const generateMetadata = async (
     // const faviconBase =
     //   settingsMap.faviconUrl?.replace("favicon.ico", "") || "/favicon/";
     const siteUrl =
-      settingsMap.siteUrl ||
       process.env.NEXT_PUBLIC_APP_URL ||
       "http://localhost:3000";
 
